@@ -26,6 +26,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public String photoFileName = "photo.jpg";
     private Button btnLogout;
     private EditText etDescription;
+    private Button btnFeed;
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
@@ -51,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         //queryPosts();
         btnLogout = findViewById(R.id.btnLogout);
+        btnFeed = findViewById(R.id.btnFeed);
+
+        btnFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, FeedActivity.class);
+                startActivity(i);
+            }
+        });
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                  finish();
             }
         });
+
     }
 
     private void launchCamera() {
@@ -177,5 +189,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    
+
 }
