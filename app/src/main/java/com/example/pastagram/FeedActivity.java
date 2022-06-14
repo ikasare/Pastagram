@@ -3,6 +3,7 @@ package com.example.pastagram;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,14 +21,13 @@ public class FeedActivity extends AppCompatActivity {
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
     private RecyclerView rvPosts;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-
         rvPosts = findViewById(R.id.rvPosts);
-
         // initialize the array that will hold posts and create a PostsAdapter
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(this, allPosts);
@@ -37,6 +37,24 @@ public class FeedActivity extends AppCompatActivity {
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
         // query posts from Parstagram
         queryPosts();
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                allPosts.clear();
+                queryPosts();
+                // Now we call setRefreshing(false) to signal refresh has finished
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
     }
     private void queryPosts() {
         // specify what type of data we want to query - Post.class
