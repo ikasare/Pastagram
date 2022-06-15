@@ -3,11 +3,14 @@ package com.example.pastagram;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
+
+import java.util.Date;
 
 public class PostDetailsActivity extends AppCompatActivity {
     private TextView tvDeatilsUsername;
@@ -33,7 +36,9 @@ public class PostDetailsActivity extends AppCompatActivity {
         if (image != null) {
             Glide.with(PostDetailsActivity.this).load(image.getUrl()).into(ivDetailsPost);
         }
-
-
+        Date createdAt = post.getCreatedAt();
+        String timeAgo = Post.calculateTimeAgo(createdAt);
+        tvDetailsTime.setText(timeAgo);
     }
+
 }
