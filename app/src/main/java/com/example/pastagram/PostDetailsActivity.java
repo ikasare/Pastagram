@@ -17,6 +17,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.Date;
 import java.util.List;
@@ -82,6 +83,23 @@ public class PostDetailsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        ibHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<ParseUser> likedBy = post.getLikedBy();
+                if(likedBy.contains(ParseUser.getCurrentUser())){
+                    // unlike
+                    likedBy.remove(ParseUser.getCurrentUser());
+                    ibHeart.setBackgroundResource(R.drawable.ufi_heart);
+                }else{
+                    likedBy.add(ParseUser.getCurrentUser());
+                    ibHeart.setBackgroundResource(R.drawable.ufi_heart_active);
+                }
+                post.setLikedBy(likedBy);
+                post.saveInBackground();
+                tvLikeCount.setText(post.getLikeCount());
+            }
+        });
 
         rvComments = findViewById(R.id.rvComments);
         adapter = new CommentsAdapter();
@@ -89,6 +107,14 @@ public class PostDetailsActivity extends AppCompatActivity {
         rvComments.setAdapter(adapter);
 
         tvDeatilsUsername.setText(post.getUser().getUsername());
+
+        if(post.getLikedBy().contains(ParseUser.getCurrentUser())){
+            ibHeart.setBackgroundResource(R.drawable.ufi_heart_active);
+        }else {
+            ibHeart.setBackgroundResource(R.drawable.ufi_heart);
+        }
+
+        tvLikeCount.setText(post.getLikeCount());
 
         ParseFile image = post.getImage();
         if (image != null) {
