@@ -125,7 +125,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         tvDetailsTime.setText(timeAgo);
 
         // load all comments in post
-
+        refreshComments();
     }
 
 }
