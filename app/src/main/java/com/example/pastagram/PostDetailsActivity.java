@@ -87,16 +87,16 @@ public class PostDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 List<ParseUser> likedBy = post.getLikedBy();
-                if(likedBy.contains(ParseUser.getCurrentUser())){
+                if(post.isLikedByCurrentUser()){
                     // unlike
-                    likedBy.remove(ParseUser.getCurrentUser());
+                    post.unlike();
                     ibHeart.setBackgroundResource(R.drawable.ufi_heart);
                 }else{
-                    likedBy.add(ParseUser.getCurrentUser());
+                    // like
+                    post.like();
                     ibHeart.setBackgroundResource(R.drawable.ufi_heart_active);
                 }
-                post.setLikedBy(likedBy);
-                post.saveInBackground();
+
                 tvLikeCount.setText(post.getLikeCount());
             }
         });

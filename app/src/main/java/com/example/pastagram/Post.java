@@ -96,4 +96,33 @@ public class Post extends ParseObject {
         int likeCount = getLikedBy().size();
         return likeCount + (likeCount == 1? " like" : " likes");
     }
+
+    public boolean isLikedByCurrentUser(){
+        List<ParseUser> likedBy = getLikedBy();
+        for(int i =0; i < likedBy.size(); i++){
+            if(likedBy.get(i).hasSameId(ParseUser.getCurrentUser())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void unlike(){
+        List<ParseUser> likedBy = getLikedBy();
+        for(int i = 0; i < likedBy.size(); i++){
+            if(likedBy.get(i).hasSameId(ParseUser.getCurrentUser())) {
+                likedBy.remove(i);
+            }
+        }
+        setLikedBy(likedBy);
+        saveInBackground();
+    }
+
+    public void like(){
+        unlike();
+        List<ParseUser> likedBy = getLikedBy();
+        likedBy.add(ParseUser.getCurrentUser());
+        setLikedBy(likedBy);
+        saveInBackground();
+    }
 }
