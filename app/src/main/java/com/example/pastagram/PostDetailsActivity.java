@@ -25,6 +25,7 @@ import java.util.List;
 public class PostDetailsActivity extends AppCompatActivity {
     private TextView tvDeatilsUsername;
     private TextView tvDetailsTime;
+    private TextView tvDetailsDescription;
     private ImageView ivDetailsPost;
     private ImageButton ibHeart;
     private ImageButton ibComment;
@@ -67,6 +68,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_details);
 
         tvDeatilsUsername = findViewById(R.id.tvUsername);
+        tvDetailsDescription = findViewById(R.id.tvDetailsDescription);
         tvDetailsTime = findViewById(R.id.tvDate);
         ivDetailsPost = findViewById(R.id.ivPhoto);
         ibHeart = findViewById(R.id.ibHeart);
@@ -105,6 +107,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         adapter = new CommentsAdapter();
         rvComments.setLayoutManager(new LinearLayoutManager(this));
         rvComments.setAdapter(adapter);
+        tvDetailsDescription.setText(post.getDescription());
 
         tvDeatilsUsername.setText(post.getUser().getUsername());
 

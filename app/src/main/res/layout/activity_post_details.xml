@@ -20,6 +20,10 @@
         android:id="@+id/ivPhoto"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
+    <TextView
+        android:id="@+id/tvDetailsDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
