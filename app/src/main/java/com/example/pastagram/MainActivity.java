@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private Button btnLogout;
-    private Button btnFeed;
     private BottomNavigationView bottomNavigationView;
 
     @Override
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         btnLogout = findViewById(R.id.btnLogout);
-        btnFeed = findViewById(R.id.btnFeed);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_profile:
                     default:
-                        // TODO: update fragment
                         fragment = new ProfileFragment();
                         break;
                 }
@@ -57,13 +54,6 @@ public class MainActivity extends AppCompatActivity {
         // set default selection
         bottomNavigationView.setSelectedItemId(R.id.action_home);
 
-        btnFeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, FeedActivity.class);
-                startActivity(i);
-            }
-        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
