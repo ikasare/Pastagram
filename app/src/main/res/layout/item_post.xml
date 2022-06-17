@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/acme"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/tvUsername"
         app:layout_constraintTop_toBottomOf="@+id/ivImage"
         tools:text="trying to look hipster" />
@@ -57,14 +59,4 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         app:srcCompat="@drawable/ufi_comment" />
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/ivLike"-->
-    <!--        android:layout_width="100dp"-->
-    <!--        android:layout_height="100dp"-->
-    <!--        android:layout_marginStart="30dp"-->
-    <!--        android:layout_marginTop="8dp"-->
-    <!--        android:scaleType="centerCrop"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/tvDescription"-->
-    <!--        tools:srcCompat="@drawable/ufi_heart_active" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
